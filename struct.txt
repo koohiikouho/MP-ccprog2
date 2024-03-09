@@ -1,0 +1,11 @@
+Object: LOVE LIVE
+Kind of:  Animation
+Kind of:  Series
+Genre:  Idol
+
+
+Object: YURU CAMP
+Kind of:  Anime
+Genre:  Slice of LIfe
+
+
