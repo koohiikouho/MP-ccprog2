@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<string.h>
+#include<stdbool.h>
+
 struct hints
 {
 	char 	strRelation[16],
@@ -13,36 +15,6 @@ struct wordStruct
 	struct 	hints sHintPair[10];
 };
 
-
-void importArray2(struct hints hint[])
-{
-	int i, j = 0;
-	char fileName[31];
-	char strWordTemp[29];
-	FILE *fp;
-	
-	fp = fopen("exportedList.txt", "r");
-	
-	fscanf(fp, "%d", &j);
-	printf("%d", j);
-	for(i = 0; i < j; i++)
-	{
-	fgets(strWordTemp, 29, fp);
-	printf("%s", strWordTemp);
-		do
-		{
-		fgets(strWordTemp, 29, fp);
-		printf("%s", strWordTemp);
-			
-		}while(strcmp(strWordTemp, "\n") != 0 );
-	
-	}
-	
-	
-	fclose(fp);
-	printf("\nData imported from \"%s\"", fileName);
-	
-}
 
 void colonRemover(char string[])
 {
@@ -84,52 +56,88 @@ void splitterFunc(char string[], char stringOut1[], char stringOut2[])
 
 void importArray(struct wordStruct sGameStruct[], int *nWordCount)
 {
-	int i, j = 0, k, arraySize;
-	char fileName[31];
+	int i, j = 0, k, l, arraySize, nOverWrite, nSkip;
+	
 	char strTemp[50];
+	char fileName[31];
 	FILE *fp;
-//	
-//	printf("Enter file name to import list (ex. exportedList.txt): ");
-//	fflush(stdin);
-//	scanf("%[^\n]%*c", fileName);
+
+	printf("Enter file name to import list (ex. exportedList.txt): ");
+	fflush(stdin);
+	scanf("%[^\n]%*c", fileName);
 	
 //	importing
 
-
-
-	fp = fopen("lovelive.txt", "r");
+	fp = fopen(fileName, "r");
 	fscanf(fp, "%d", &arraySize);
 	
 	for( i = 0 ; i < arraySize + 1; i++)
 	{
-			
-		fgets(strTemp, 50, fp);
-		if(i != 0)
+	strcpy(strTemp, "\0");
+	nOverWrite = 0;
+	nSkip = 0;
+
+	fgets(strTemp, 50, fp);
+	
+	if(i != 0)
+	{
+		for(k = 0; k < *nWordCount; k++)
 		{
-			colonRemover(strTemp);
+		
+			if(k == 0)	
+			{ strTemp[ strlen(strTemp) -1] = '\0'; colonRemover(strTemp); };			
+		
+			if(strcmp(strTemp, sGameStruct[k].strWord) == 0 )
+			{
+				nSkip = 1;
+				printf("Duplicate found(%s)! Do you want to overwrite duplicate (1 - Yes, 0 - No)?: ", strTemp);
+				fflush(stdin);
+				scanf("%d", &nOverWrite);
+				
+			
+				if(nOverWrite == 1)
+				{	
+					l = 0;
+					fgets(strTemp, 50, fp);
+					do
+					{
+						strTemp[ strlen(strTemp) - 1 ] = '\0';		
+						splitterFunc(strTemp, sGameStruct[k].sHintPair[l].strRelation, sGameStruct[k].sHintPair[l].strRelationValue);
+						fgets(strTemp, 50, fp);
+						l++;
+					;
+					}while(strcmp(strTemp, "\n") != 0);	
+				}
+			
+			};
+		
+		}
+	}
+	
+		if(i != 0 && nSkip != 1)
+		{      
+			colonRemover(strTemp);			
 			strcpy(sGameStruct[j].strWord, strTemp);
+						
 			k = 0;
 			fgets(strTemp, 50, fp);
 			do
 			{
+				strTemp[ strlen(strTemp) - 1 ] = '\0';		
 				splitterFunc(strTemp, sGameStruct[j].sHintPair[k].strRelation, sGameStruct[j].sHintPair[k].strRelationValue);
 				fgets(strTemp, 50, fp);
 				k++;
 			}while(strcmp(strTemp, "\n") != 0);
 			
-			
 			j++;
 			*nWordCount+=1;
 		}
 		
-
 	}
-
 	
 	fclose(fp);
 //end import
-//	printf("\nData imported from \"%s\"", fileName);
-	
+	printf("\nData imported from \"%s\"", fileName);
 	
 }
 
@@ -137,20 +145,23 @@ int main()
 {
 	struct wordStruct sGameStruct[150];
 	
-	int nWordCount = 0;
+	int nWordCount = 1;
 	int i;
 	char string[29];
 	
 //	strcpy(string, "Object: RIKO SAKURAUCHI");
+
 	importArray(sGameStruct, &nWordCount);
 	
-	printf("%s", sGameStruct[1].strWord);
+;
 //splitterFunc("kind of: cute girl");
-
-	printf("\n%s", sGameStruct[1].sHintPair[0].strRelation);
-	printf("\n%s", sGameStruct[1].sHintPair[0].strRelationValue);
-	printf("\n%s", sGameStruct[1].sHintPair[1].strRelation);
-	printf("\n%s", sGameStruct[1].sHintPair[1].strRelationValue);
+	printf("%s", sGameStruct[0].strWord);
+	printf("\n%s", sGameStruct[0].sHintPair[0].strRelation);
+	printf(" %s", sGameStruct[0].sHintPair[0].strRelationValue);
+	printf("\n%s", sGameStruct[0].sHintPair[1].strRelation);
+	printf(" %s", sGameStruct[0].sHintPair[1].strRelationValue);
+	printf("\n%s", sGameStruct[0].sHintPair[2].strRelation);
+	printf(" %s", sGameStruct[0].sHintPair[2].strRelationValue);
 //	colonRemover(string);
 //		printf("%s", string);
 

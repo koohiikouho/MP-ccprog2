@@ -1,4 +1,4 @@
-9
+7
 Object: TAKAMI CHIKA
 Hair: Orange
 Role: Main Protagonist
@@ -43,24 +43,10 @@ Hair: Medium-Length
 Hair: Red
 Seiyuu: Furihata Ai
 
-Object: OHARA MARI
-Catchphrase: Shiny!
-Part of: Guily Kiss!
-Hair: Blonde
-Hair: Medium-Length
-Seiyuu: Suzuki Aina
-
 Object: MATSUURA KANAN
 Part of: AZALEA
 Eyes: Purple
 Hair: Ponytail
 Hair: Blue
 Seiyuu: Suwa Nanaka
-
-Object: KUROSAWA DIA
-Part of: AZALEA
-Hair: Long
-Hair: Black
-Catchphrase: Buu Buu
-Seiyuu: Komiya Arisa
 
