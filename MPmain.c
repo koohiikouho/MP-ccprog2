@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 //	struct for hints
 struct hints
@@ -261,15 +262,16 @@ void importArray(struct wordStruct sGameStruct[], int *nWordCount)
 	nSkip = 0;
 
 	fgets(strTemp, 50, fp);
-	strTemp[ strlen(strTemp) -1] = '\0';	
+	strTemp[ strlen(strTemp) -1] = '\0';
+	colonRemover(strTemp);
+		
 	if(i != 0)
 	{
 		for(k = 0; k < *nWordCount; k++)
-		{	  			
-		
+		{ 			
 			if(strcmp(strTemp, sGameStruct[k].strWord) == 0 )
 			{
-				colonRemover(strTemp);
+				
 				nSkip = 1;
 				printf("Duplicate found(%s)! Do you want to overwrite duplicate (1 - Yes, 0 - No)?: ", strTemp);
 				fflush(stdin);
@@ -296,7 +298,7 @@ void importArray(struct wordStruct sGameStruct[], int *nWordCount)
 	
 	if(i != 0 && nSkip != 1)
 		{      
-			colonRemover(strTemp);	
+		
 			strcpy(sGameStruct[*nWordCount].strWord, strTemp);
 			k = 0;
 			fgets(strTemp, 50, fp);
@@ -605,7 +607,6 @@ do
 		case 2:
 			do
 			{
-			
 			nAdMenVal = adminMenu();
 			switch(nAdMenVal)
 			{
