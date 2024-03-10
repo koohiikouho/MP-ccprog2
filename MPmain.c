@@ -626,6 +626,7 @@ do
 					break;
 				case 6:
 					viewWords(sGameStruct, nWordCount);
+					break;
 				case 7:
 					viewHints(sGameStruct, nWordCount);
 					break;					
