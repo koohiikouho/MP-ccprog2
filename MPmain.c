@@ -63,9 +63,15 @@ void printArray(int nWidth, int nHeight, char array[][nWidth])
 	}
 }
 
-int mainMenu()
+/*	mainMenu displays main menu, scans, and returns the appropriate integer for the switch case in the main
+	@return 1-3 depending on user input
+*/
+int
+mainMenu()
 {
+	//variable declaration
 	int nReturnVal = 0, nLoopCount = 0;
+	
 	do
 	{
 	if(nLoopCount != 0)
@@ -75,13 +81,19 @@ int mainMenu()
 	printf("\nEnter your choice : ");
 	scanf("%d", &nReturnVal);
 	nLoopCount++;
-	} while(nReturnVal < 1 && nReturnVal > 3);
+	} while(nReturnVal < 1 && nReturnVal > 3); //while loop to guard wrong inputs
 	
-	return nReturnVal;
+	return nReturnVal; // returns value from nReturnVal
 }
 
-int adminMenu()
+/*	adminMenu displays admin menu, scans, and returns the appropriate integer for the switch case in the main
+	@return 1-10 depending on user input
+	Pre-condition: user selects 2 during mainMenu function
+*/
+int
+adminMenu()
 {
+	//variable declaration
 	int rV = 0, loopCount = 0;
 	do
 	{
@@ -92,26 +104,36 @@ int adminMenu()
 	printf("\nEnter your choice : ");
 	scanf("%d", &rV);
 	loopCount++;
-	} while(rV < 1 && rV > 9);
+	} while(rV < 1 && rV > 9); // while input to guard wrong inputs
 	
-	return rV;
+	return rV; //returns value from rV
 }
 
-void toUpperString(char string[])
+/* toUpperString converts all characters into upper case using the to upper function
+	@param string[] - address of string to be converted
+*/
+void
+toUpperString(char string[])
 {
 	int i;
 	for(i = 0; i < strlen(string); i++)
 		string[i] = toupper(string[i]);
 }
 
+/* addTrivia adds trivia to either a pre existing word or a new word
+	@param string[] - address of string to be converted
+*/
 void addTrivia(struct hints sHints[])
 {
+	//variable declaration / temp container declaration
 	int i, nContinue = 0;
 	char strTemp1[16], strTemp2[31];
 	
-	while(strcmp(sHints[i].strRelation, "\0") != 0)
+	//checks where the next unoccupied hint is
+	while(strcmp(sHints[i].strRelation, "\0") != 0 && i < 10)
 		i++;
 	
+	//do while asks for inputs until nContinue is == 0 or i is equal to more than 10
 	do
 	{
 	if(nContinue == 1) i++;
@@ -131,7 +153,14 @@ void addTrivia(struct hints sHints[])
 	
 }
 
-void addWord(struct wordStruct gStruct[], int *nWordCount)
+/* addWord adds a word and a minimum of 1 relation and relation value to the struct in the main menu
+	@param gStruct[] - gives access to the entire struct as it is needed for calling the addTrivia function
+	@param nWordCount - increments by one every time a word is added
+	Pre-condition: Add Word option in admin menu is selected
+*/
+void
+addWord(struct	wordStruct gStruct[],
+					int *nWordCount)
 {
 	int i = 0, j = 0, nDupeCount = 0, nRepCount = 0;
 	char strTemp[21];
@@ -145,23 +174,28 @@ void addWord(struct wordStruct gStruct[], int *nWordCount)
 	printf("\nEnter word to add (ALL CAPS): ");
 	fflush(stdin);
 	scanf("%[^\n]%*c", strTemp);
-	toUpperString(strTemp);
+	toUpperString(strTemp); // turns input into all caps just in case
 	
-	for(j = 0; j < *nWordCount; j++)
+	for(j = 0; j < *nWordCount; j++) //checks for duplicates
 		if(strcmp(strTemp, gStruct[j].strWord) == 0)
 			nDupeCount++;
 	
 	if(nDupeCount==0)
 		strcpy(gStruct[i].strWord, strTemp);
 	nRepCount++;
-	}while(nDupeCount != 0);
+	}while(nDupeCount != 0); //guards against duplicates
 	
-	addTrivia(gStruct[i].sHintPair);
+	addTrivia(gStruct[i].sHintPair); //a minimum of one trivia is needed per word
 	
-	*nWordCount+=1;
+	*nWordCount+=1; //increments word count by one
 }
 
-void initGameArr(struct wordStruct sGameStruct[])
+/* initGameArr initializes sGameStruct and turns everything into null; is only executed once
+	@param sGameStruct[] - gives access to the struct to be initialized
+	Pre-condition: program runs
+*/
+void
+initGameArr(struct wordStruct sGameStruct[])
 {
 	int i,j;
 	for(i=0;i<150;i++)strcpy(sGameStruct[i].strWord,"\0");
@@ -171,22 +205,29 @@ void initGameArr(struct wordStruct sGameStruct[])
 			strcpy(sGameStruct[i].sHintPair[j].strRelationValue,"\0");}
 }
 
-void exportArray(struct wordStruct sGameStruct[], int nWordCount)
+/* exportArray exports the contents of the program into the txt file desired by the user
+	@param gStruct[] - gives access to the struct for printing
+	@param nWordCount - count is added for the for loop, is also placed at the very top of the file
+	Pre-condition: export option is selected
+*/
+void
+exportArray(struct wordStruct sGameStruct[],
+						int nWordCount)
 {
 	int i, j = 0;
 	char fileName[31];
 	FILE *fp;
 	
 	fflush(stdin);
-	printf("Enter file name (ex. exportedList.txt): ");
-	scanf("%[^\n]%*c", fileName);
+	printf("Enter file name (ex. exportedList.txt): "); 
+	scanf("%[^\n]%*c", fileName); //scans for user input, file name has a limit of 30 characters
 	fp = fopen(fileName, "w");
 	
 	printf("\nSaving data...");
-	fprintf(fp, "%d\n", nWordCount);
+	fprintf(fp, "%d\n", nWordCount); //prints how many words are currently in the game's array
 	for(i = 0; i < nWordCount; i++)
 	{
-	fprintf(fp, "Object: %s\n", sGameStruct[i].strWord);
+	fprintf(fp, "Object: %s\n", sGameStruct[i].strWord); //prints the word with Object: as a prefix
 	j = 0;
 	do{
 		fprintf(fp, "%s: ", sGameStruct[i].sHintPair[j].strRelation);
@@ -196,18 +237,28 @@ void exportArray(struct wordStruct sGameStruct[], int nWordCount)
 	fprintf(fp, "\n");
 	}
 	fclose(fp);
-	printf(" Data saved as \"%s\"!\n", fileName);
+	printf(" Data saved as \"%s\"!\n", fileName); //shows what file you wrote to
 	
 }
 
-void colonRemover(char string[])
+/* colonRemover removes the colon from an imported word
+	@param string[] - string to remove colon from
+	Pre-condition: import function is called
+*/
+void
+colonRemover(char string[])
 {
 	int i;
 	for(i = 0; string[i] != ' ';i++);
 	i++;
 	strcpy(string, string + i);
 }
-
+/* splitterFunc splits relation and relation value from an imported word
+	@param string[] - string to split
+	@param stringOut1[] - string to store relation in
+	@param StringOut2[] - string to store relation value in
+	Pre-condition: import function is called
+*/
 void splitterFunc(char string[], char stringOut1[], char stringOut2[])
 {
 	char tempstring2[50];
@@ -220,8 +271,8 @@ void splitterFunc(char string[], char stringOut1[], char stringOut2[])
 	strcpy(tempstring4, string);
 	
 	for(i = 0; string[i] != ':';i++);
-	tempstring4[i] = '\0';
-	strcpy(tempstring2, tempstring4);
+	tempstring4[i] = '\0'; // replace colon with null byte then
+	strcpy(tempstring2, tempstring4); //strcpy to only copy the relation sans post null byte
 	
 	strLength = strlen(string) - strlen(tempstring2) - 2 - 1;
 	k = 0;
@@ -231,12 +282,15 @@ void splitterFunc(char string[], char stringOut1[], char stringOut2[])
 	i++;
 	k++;
 	}while(k != strLength + 2);
-	tempstring3[k] = '\0';
+	tempstring3[k] = '\0'; //removes \n from relation value - this gave me a massive headache with strcmp
 
 	strcpy(stringOut1, tempstring2);
 	strcpy(stringOut2, tempstring3);
 	
 }
+/* importArray imports words from a text file and stores it in the currently running program's memory
+
+*/
 
 void importArray(struct wordStruct sGameStruct[], int *nWordCount)
 {
