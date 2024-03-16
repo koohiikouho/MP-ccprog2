@@ -1,0 +1,66 @@
+9
+Object: TAKAMI CHIKA
+Hair: Orange
+Role: Main Protagonist
+Hair: Short
+Seiyuu: Inami Anju
+Part of: CYaRon!
+
+Object: WATANABE YOU
+Catchphrase: Yousoro!
+Seiyuu: Saitou Shuka
+Part of: CYaRon!
+Hair: Grey
+Hair: Short
+
+Object: SAKURAUCHI RIKO
+Plays: Piano
+Part of: Guilty Kiss
+Hair: Red
+Hair: Long
+Seiyuu: Aida Rikako
+
+Object: TSUSHIMA YOSHIKO
+Is a: Chuunibyo
+Part of: Guilty Kiss
+Hair: Blue
+Hair: Long
+Seiyuu: Kobayashi Aika
+
+Object: KUNIKIDA HANAMARU
+Part of: AZALEA
+Hair: Medium-Length
+Hair: Brown
+Eyes: Yellow
+Likes: Books
+Seiyuu: Takatsuki Kinako
+
+Object: KUROSAWA RUBY
+Catchphrase: Ganbaruby!
+Sister of: Kurosawa Dia
+Part of: CYaRon!
+Hair: Medium-Length
+Hair: Red
+Seiyuu: Furihata Ai
+
+Object: OHARA MARI
+Catchphrase: Shiny!
+Part of: Guily Kiss!
+Hair: Blonde
+Hair: Medium-Length
+Seiyuu: Suzuki Aina
+
+Object: MATSUURA KANAN
+Part of: AZALEA
+Eyes: Purple
+Hair: Ponytail
+Hair: Blue
+Seiyuu: Suwa Nanaka
+
+Object: KUROSAWA DIA
+Part of: AZALEA
+Hair: Long
+Hair: Black
+Catchphrase: Buu Buu
+Seiyuu: Komiya Arisa
+
