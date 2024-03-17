@@ -127,8 +127,7 @@ toUpperString(char string[])
 void addTrivia(struct hints sHints[])
 {
 	//variable declaration / temp container declaration
-	int i;
-	bool bContinue = false;
+	int i, bContinue = 0;
 	char strTemp1[16], strTemp2[31];
 	
 	//checks where the next unoccupied hint is
@@ -138,6 +137,8 @@ void addTrivia(struct hints sHints[])
 	if(i < 10)
 	do
 	{
+	if(bContinue == 1)
+		i++; 
 	printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
 	fflush(stdin);
 	scanf("%[^\n]%*c", strTemp1);
@@ -149,9 +150,9 @@ void addTrivia(struct hints sHints[])
 	strcpy(strTemp1, "\0");
 	strcpy(strTemp2, "\0");
 	printf("\nAdd more hints (1 to continue, 0 to stop)? ");
+	fflush(stdin);
 	scanf("%d", &bContinue);
-	if(bContinue == false) i++; 
-	}while( bContinue == true && i < 10);
+	}while( bContinue == 1 && i < 10);
 	else
 		printf("\nHint data already full! Delete to add more");
 	
@@ -693,7 +694,14 @@ void viewHints(struct wordStruct sGameStruct[] , int nWordCount)
 	}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);
 }
 
-int main()
+void
+gamePhase(struct wordStruct sGameStruct[], int nWordCount)
+{
+	
+}
+
+int
+main()
 {
 	int nMenuVal, nAdMenVal, nWordCount = 0;
 //initialize array
@@ -706,7 +714,10 @@ do
 	switch(nMenuVal)
 	{
 		case 1:
-			
+		if(nWordCount != 0)
+			gamePhase(sGameStruct, nWordCount);
+		else
+			printf("\n");
 			break;
 		case 2:
 			do
