@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <time.h>
 
 //	struct for hints
 struct hints
@@ -105,7 +106,7 @@ adminMenu()
 	printf("\nEnter your choice : ");
 	fflush(stdin); //in case of string or char input
 	scanf("%d", &rV);
-	} while( !(rV >= 1 && rV <= 9) ); // while input to guard wrong inputs
+	} while( !(rV >= 1 && rV <= 10) ); // while input to guard wrong inputs
 
 	return rV; //returns value from rV
 }
@@ -676,7 +677,7 @@ void deleteHint(struct wordStruct sGameStruct[] , int nWordCount)
 
 }
 
-/* viewHints views hints from 
+/* viewHints views hints from the wordStruct, takes string as input, searches, then gives back the result
 
 */
 void viewHints(struct wordStruct sGameStruct[] , int nWordCount)
@@ -685,19 +686,100 @@ void viewHints(struct wordStruct sGameStruct[] , int nWordCount)
 	displayAlpha(sGameStruct, nWordCount);
 	printf("Enter word of hints to view: ");
 	nIndex = searchWord(sGameStruct, nWordCount);
-	printf("\nHints for %s:\n", sGameStruct[nIndex].strWord);
-	j = 0;
-	do
+	if(nIndex != -1)
 	{
-	printf("%d. %s: %s\n", j + 1, sGameStruct[nIndex].sHintPair[j].strRelation ,sGameStruct[nIndex].sHintPair[j].strRelationValue );
-	j++;
-	}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);
+		printf("\nHints for %s:\n", sGameStruct[nIndex].strWord);
+		j = 0;
+		do
+		{
+		printf("%d. %s: %s\n", j + 1, sGameStruct[nIndex].sHintPair[j].strRelation ,sGameStruct[nIndex].sHintPair[j].strRelationValue );
+		j++;
+		}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);
+	}
+	else
+		printf("\nWord not found\n");
+	
+}
+
+
+int boardSize(int *xAxis, int *yAxis, int *product)
+{
+	printf("\nInput width of board (Minimum - 3, Maximum - 10): ");
+	do{ fflush(stdin); scanf("%d", xAxis);
+	} while ( !(*xAxis > 2 && *xAxis <11));
+		printf("\nInput length of board (Minimum - 3, Maximum - 10): ");
+	do{ fflush(stdin); scanf("%d", yAxis);
+	} while ( !(*yAxis > 2 && *yAxis <11));
+	
+ 	*product = *yAxis * *xAxis;
+}
+
+void
+printBoard(struct wordStruct tempBoard[10][10], int nX, int nY)
+{
+	int i , j;
+	for(i = 0; i < nX; i++)
+		printf("%d ", i + 1);
+	printf("\n");
+	for(i = 0; i < nY ; i++)
+	{
+		for(j = 0; j < nX; j++)
+		{	printf("%c ", tempBoard[i][j].strWord[0]);
+			
+		}
+		printf("\n");
+	}
+}
+
+void
+fillStructBoard(struct wordStruct sGameStruct[], struct wordStruct sTempStruct[10][10], int nX, int nY, int nWordCount, int nSize)
+{
+	int i, j, k = 0, nTemp, nFindNum = false;
+	int nArrDupeCheck[150];
+	time_t randSeed;
+	srand( (unsigned) time(&randSeed));
+	
+	for(j = 0; j < nSize; j++)
+	{	do
+		{
+		nTemp =  rand() % (nWordCount);
+		nFindNum = false;
+		for(i = 0; i < nSize; i++)
+			if(nArrDupeCheck[i] == nTemp)
+				nFindNum = true;
+		} while (nFindNum == true);
+		nArrDupeCheck[j] = nTemp;
+	}
+
+	for(i = 0; i < nY; i++)
+	{
+		
+		for(j = 0; j < nX; j++)
+		{
+			sTempStruct[i][j] = sGameStruct[nArrDupeCheck[k]];
+			k++;
+		}
+	}
+	
 }
 
 void
 gamePhase(struct wordStruct sGameStruct[], int nWordCount)
 {
+	struct wordStruct sTempGameStruct[10][10];
+	int nXAxis, nYAxis, nSize = 0;
+	do{
+	if(nSize > nWordCount)
+		printf("\nNot enough words in list to make board \n(Inputted size of board: %d) (Words in word list: %d)\n", nSize, nWordCount);
+	boardSize(&nXAxis, &nYAxis, &nSize);
+	} while (nSize > nWordCount);
 	
+	fillStructBoard(sGameStruct, sTempGameStruct, nXAxis, nYAxis, nWordCount, nSize);
+	printBoard(sTempGameStruct, nXAxis, nYAxis);
+	
+	printf("From left to right, enter a number ");
+//	printBoard(cArrBoard, nXAxis, nYAxis);
+
 }
 
 int
@@ -707,7 +789,7 @@ main()
 //initialize array
 	struct wordStruct sGameStruct[150]; initGameArr(sGameStruct);
 
-//	char arrBoard[10][10];
+
 do
 {
 	nMenuVal = mainMenu();
@@ -717,7 +799,7 @@ do
 		if(nWordCount != 0)
 			gamePhase(sGameStruct, nWordCount);
 		else
-			printf("\n");
+			printf("No words loaded in yet!\n\n");
 			break;
 		case 2:
 			do
@@ -751,6 +833,9 @@ do
 					break;
 				case 9:
 					importArray(sGameStruct, &nWordCount);
+					break;
+				default:
+					printf("\n");
 					break;
 			}
 			}while(nAdMenVal != 10);
