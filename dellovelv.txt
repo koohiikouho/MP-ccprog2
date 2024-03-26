@@ -1,4 +1,4 @@
-25
+19
 Object: TAKAMI CHIKA
 Hair: Orange
 Role: Main Protagonist
@@ -7,14 +7,6 @@ Seiyuu: Inami Anju
 Part of: CYaRon!
 School Year: 2nd Year
 Likes: Oranges
-
-Object: WATANABE YOU
-Catchphrase: Yousoro!
-Seiyuu: Saitou Shuka
-Part of: CYaRon!
-Hair: Grey
-Hair: Short
-School Year: 2nd Year
 
 Object: SAKURAUCHI RIKO
 Plays: Piano
@@ -99,15 +91,6 @@ Eyes: Orange
 Seiyuu: Murakami Natsumi
 School Year: 2nd Year
 
-Object: LANZHU ZHONG
-Part of: R3BIRTH
-Hair: Strawberry Blonde
-Hair: Long
-Eyes: Blue
-Seiyuu: Homoto Akina
-Nationality: Chinese
-School Year: 2nd Year
-
 Object: NAKASU KASUMI
 Part of: QU4RTZ
 Eyes: Magenta
@@ -122,14 +105,6 @@ Eyes: Red
 Hair: Dark Green
 Hair: Short
 Seiyuu: Koizumi Moeka
-School Year: 1st Year
-
-Object: OSAKA SHIZUKU
-Part of: A ZU NA
-Hair: Long
-Hair: Brown
-Eyes: Brown
-Seiyuu: Maeda Kaori
 School Year: 1st Year
 
 Object: TENNOUJI RINA
@@ -157,14 +132,6 @@ Eyes: Purple
 Seiyuu: Kitou Akari
 School Year: 3rd Year
 
-Object: VERDE EMMA
-Part of: QU4RTZ
-Hair: Brown
-Hair: Twin-tails
-Eyes: Blue
-Seiyuu: Sashide Maria
-School Year: 3rd Year
-
 Object: TAYLOR MIA
 Part of: R3BIRTH
 Hair: Silver
@@ -173,15 +140,6 @@ Eyes: Grey
 Role: Co-songwriter
 Seiyuu: Uchida Shu
 School Year: 3rd Year
-
-Object: SHIBUYA KANON
-Eyes: Purple
-Hair: Orange
-Hair: Medium-Legnth
-Friend: Arashi Chisato
-Part of: CatChu!
-School Year: 3rd Year
-Seiyuu: Sayuri Date
 
 Object: ARASHI CHISATO
 Eyes: Pink
@@ -202,13 +160,4 @@ Part of: CatChu!
 Catchprase: Galaxy!
 Hates: Keke Tang
 Seiyuu: Peyton Naomi
-
-Object: TANG KEKE
-Eyes: Blue
-Hates: Heanna Sumire
-Hair: Short
-Hair: Grey
-Nationality: Chinese
-Part of: KALEIDOSCORE
-Seiyuu: Liyuu
 

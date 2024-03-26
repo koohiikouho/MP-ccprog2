@@ -1,4 +1,4 @@
-25
+21
 Object: TAKAMI CHIKA
 Hair: Orange
 Role: Main Protagonist
@@ -78,7 +78,7 @@ Object: UEHARA AYUMU
 Part of: A ZU NA
 Likes: You(Yuu) a lot
 Eyes: Amber
-Hair: Salmon Pink
+Hair: Orange
 Hair: Medium-Length
 Seiyuu: Onishi Aguri
 School Year: 2nd Year
@@ -86,10 +86,10 @@ School Year: 2nd Year
 Object: YUUKI SETSUNA
 Part of: A ZU NA
 Hair: Black
+Hair: Long
 Eyes: Gray
 Seiyuu: Hayashi Coco
 School Year: 2nd Year
-Hair: Long
 
 Object: MIYASHITA AI
 Part of: Diver Diva
@@ -105,7 +105,6 @@ Hair: Strawberry Blonde
 Hair: Long
 Eyes: Blue
 Seiyuu: Homoto Akina
-Nationality: Chinese
 School Year: 2nd Year
 
 Object: NAKASU KASUMI
@@ -173,42 +172,4 @@ Eyes: Grey
 Role: Co-songwriter
 Seiyuu: Uchida Shu
 School Year: 3rd Year
-
-Object: SHIBUYA KANON
-Eyes: Purple
-Hair: Orange
-Hair: Medium-Legnth
-Friend: Arashi Chisato
-Part of: CatChu!
-School Year: 3rd Year
-Seiyuu: Sayuri Date
-
-Object: ARASHI CHISATO
-Eyes: Pink
-Hair: Double Buns
-Hair: White
-Part of: 5yncri5e!
-Likes: Takoyaki
-Friend: Shibuya Kanon
-School Year: 3rd Year
-Catchphrase: Wissu!
-Seiyuu: Misaki Nako
-
-Object: HEANNA SUMIRE
-Eyes: Green
-Hair: Blonde
-Hair: Long
-Part of: CatChu!
-Catchprase: Galaxy!
-Hates: Keke Tang
-Seiyuu: Peyton Naomi
-
-Object: TANG KEKE
-Eyes: Blue
-Hates: Heanna Sumire
-Hair: Short
-Hair: Grey
-Nationality: Chinese
-Part of: KALEIDOSCORE
-Seiyuu: Liyuu
 
