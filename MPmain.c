@@ -452,9 +452,10 @@ void addTriviaComp(struct wordStruct sGameStruct[],
 	addTrivia(sGameStruct[indexTemp].sHintPair);
 }
 
-/*	searchWord seraches for a word in a structure, returns -1 if word is not found
+/*	searchWord seraches for a word in a structure
 	@param wordStruct sGameStruct - struct to search word in
 	@param nWordCount - for linear searching purposes
+	@return returns -1 if word is not found, index of the word if word is found
 */
 int searchWord(struct wordStruct sGameStruct[] , int nWordCount)
 {
@@ -711,26 +712,28 @@ printBoard(struct wordStruct tempBoard[10][10], int nX, int nY,  int nLevel)
 void
 fillStructBoard(struct wordStruct sGameStruct[], struct wordStruct sTempStruct[10][10], int nX, int nY, int nWordCount, int nSize)
 {
-	int i, j, k = 0, nTemp, nFindNum = false;
+	int i, j, k = 0, nTemp, nFindNum = false, loopChecker = 0;
 	int nArrDupeCheck[150];
 	time_t randSeed;
 	srand( (unsigned) time(&randSeed));
+	rand(); rand(); rand();
 	
 	for(j = 0; j < nSize; j++)
 	{	do
 		{
 		nTemp =  rand() % (nWordCount);
 		nFindNum = false;
-		for(i = 0; i < nSize; i++)
+		loopChecker++;
+		for(i = 0; i < nSize - 1; i++) // -1 just so it doesn't stuck in a loop
 			if(nArrDupeCheck[i] == nTemp)
 				nFindNum = true;
+		
 		} while (nFindNum == true);
 		nArrDupeCheck[j] = nTemp;
 	}
 
 	for(i = 0; i < nY; i++)
 	{
-		
 		for(j = 0; j < nX; j++)
 		{
 			sTempStruct[i][j] = sGameStruct[nArrDupeCheck[k]];
@@ -836,8 +839,7 @@ gamePhase(struct wordStruct sGameStruct[], int nWordCount)
 	boardSize(&nXAxis, &nYAxis, &nSize);
 	} while (nSize > nWordCount); //if there's more spaces than words, it'll guard that from it
 	
-	fillStructBoard(sGameStruct, sTempGameStruct, nXAxis, nYAxis, nWordCount, nSize);
-	
+	fillStructBoard(sGameStruct, sTempGameStruct, nXAxis, nYAxis, nWordCount, nSize);	
 	wordPick(sTempGameStruct, nXAxis, nYAxis);
 	
 	printf("\nGame Over\n");
