@@ -4,8 +4,15 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <time.h>
-#include "eieimun.c"
-
+#include "eieimun.h"
+/********************************************************************************************************
+This is to certify that this project is my own work, based on my personal efforts in studying and applying the concepts
+learned. I have constructed the functions and their respective algorithms and corresponding code by myself. The
+program was run, tested, and debugged by my own efforts. I further certify that I have not copied in part or whole or
+otherwise plagiarized the work of other students and/or persons.
+Ron Fourier B. Alonzo, DLSU ID# 12306002
+Cochise John M. King, DLSU ID# 12347574
+*********************************************************************************************************/
 //	struct for hints
 struct hints
 {
@@ -47,11 +54,12 @@ mainMenu()
 	Pre-condition: user selects 2 during mainMenu function
 */
 int
-adminMenu()
+adminMenu(int nWordCount)
 {	
-	int rV = 1; //variable declaration
+	int rV = 1; bool bRepeat; //variable declaration
 	do
 	{
+	bRepeat = false;
 	if(!(rV >= 1 && rV <= 9) )
 		printf("\nENTER VALID VALUE\n");
 	printf("\nSelect Option:\n");
@@ -59,8 +67,8 @@ adminMenu()
 	printf("\nEnter your choice : ");
 	fflush(stdin); //in case of string or char input
 	scanf("%d", &rV);
-	} while( !(rV >= 1 && rV <= 10) ); // while input to guard wrong inputs
-
+	} while( !(rV >= 1 && rV <= 10) || bRepeat == true); // while input to guard wrong inputs
+	
 	return rV; //returns value from rV
 }
 
@@ -136,7 +144,6 @@ addWord(struct	wordStruct gStruct[],
 	for(j = 0; j < *nWordCount; j++) //checks for duplicates
 		if(strcmp(strTemp, gStruct[j].strWord) == 0)
 			bDupe = true;
-		else bDupe = false;
 	
 	if(bDupe == false)
 		strcpy(gStruct[i].strWord, strTemp);
@@ -374,82 +381,47 @@ void viewWords(struct wordStruct sGameStruct[],
 			tempStruct[min] = tempStruct2;
 		}	
 	}
-printf("\n%d words currently loaded\n", nWordCount); //prints how many words are currently loaded
-i = 0;
-do //prints the currently selected word until X
-{
-	printf("%d. %s\n", i+1, tempStruct[i].strWord);
-	fflush(stdin);
-	j = 0;
-	do
+	printf("\n%d words currently loaded\n", nWordCount); //prints how many words are currently loaded
+	i = 0;
+	do //prints the currently selected word until X
 	{
-	printf("%s: %s\n",tempStruct[i].sHintPair[j].strRelation,tempStruct[i].sHintPair[j].strRelationValue);
-	j++;
-	}while(strcmp(tempStruct[i].sHintPair[j].strRelation, "\0") != 0);
-	printf("\npress 'N' for next, 'P' for previous, 'X' to end the display and go back to the menu: ");
-
-	do
-	{
-	fflush(stdin);
-	scanf("%c", &cSelect);	
-	cSelect = toupper(cSelect);
-		switch(cSelect)
+		printf("%d. %s\n", i+1, tempStruct[i].strWord);
+		fflush(stdin);
+		j = 0;
+		do
 		{
-			case 'N':
-			if(i != nWordCount -1)	
-			{i++;}	
-			else if ( i == nWordCount - 1)
-			{ printf("REACHED END OF LIST\n"); }
-				break;
-			case 'P':
-			if(i != 0)
-			{	i--;}
-			else if ( i == 0)
-			{	printf("REACHED END OF LIST\n");}
-				break;
-			case 'X':
-				break;
-			default:
-				printf("Invalid input\n");
-				break;
-		}
-	} while(cSelect != 'X' && cSelect != 'P' && cSelect != 'N');
-		
-}while(cSelect != 'X');
-}
-/* 	printAll prints every single 
-	@param wordSturct sGameStruct - struct to print from
-	@param nWordCount - how many times the for loop will run
-	Pre-condition: executed for functions that require all words to be displayed
-*/
-void printAll(struct wordStruct sGameStruct[],
-			  int nWordCount)
-{
-	int i; //variable declaration
-	for(i = 0; i < nWordCount; i++)
-		printf("%d. %s\n", i + 1, sGameStruct[i].strWord );
-}
-
-/* 	addTriviaComp reuses prexisting addTrivia function for option number 2, gets input (word) searches it and calls the addTrivia function
-	@param wordStruct sGameStruct - struct to add trivia to
-	@param nWordCount - for the for loop that will search the word that is inputted
-*/
-void addTriviaComp(struct wordStruct sGameStruct[],
-				   int nWordCount)
-{
-	int indexTemp, i; //variable declaration
-	char temp[21];
-	printAll( sGameStruct, nWordCount );
-	printf("\nEnter word to add trivia to: ");
-	fflush(stdin);
-	scanf("%[^\n]&*c", temp);
-	toUpperString(temp);
+		printf("%s: %s\n",tempStruct[i].sHintPair[j].strRelation,tempStruct[i].sHintPair[j].strRelationValue);
+		j++;
+		}while(strcmp(tempStruct[i].sHintPair[j].strRelation, "\0") != 0);
+		printf("\npress 'N' for next, 'P' for previous, 'X' to end the display and go back to the menu: ");
 	
-	for(i = 0; i < nWordCount; i++)
-		if(strcmp(sGameStruct[i].strWord, temp) == 0)
-			indexTemp = i;
-		
-	addTrivia(sGameStruct[indexTemp].sHintPair);
+		do
+		{
+		fflush(stdin);
+		scanf("%c", &cSelect);	
+		cSelect = toupper(cSelect);
+			switch(cSelect)
+			{
+				case 'N':
+				if(i != nWordCount -1)	
+				{i++;}	
+				else if ( i == nWordCount - 1)
+				{ printf("REACHED END OF LIST\n"); }
+					break;
+				case 'P':
+				if(i != 0)
+				{	i--;}
+				else if ( i == 0)
+				{	printf("REACHED END OF LIST\n");}
+					break;
+				case 'X':
+					break;
+				default:
+					printf("Invalid input\n");
+					break;
+			}
+		} while(cSelect != 'X' && cSelect != 'P' && cSelect != 'N');
+	}while(cSelect != 'X');
 }
 
 /*	searchWord seraches for a word in a structure
@@ -471,6 +443,23 @@ int searchWord(struct wordStruct sGameStruct[] , int nWordCount)
 			return i;	//returns i when word is found, return -1 doesn't get executed
 	
 	return -1;
+}
+
+/* 	addTriviaComp reuses prexisting addTrivia function for option number 2, gets input (word) searches it and calls the addTrivia function
+	@param wordStruct sGameStruct - struct to add trivia to
+	@param nWordCount - for the for loop that will search the word that is inputted
+*/
+void addTriviaComp(struct wordStruct sGameStruct[],
+				   int nWordCount)
+{	
+	int i; //variable declaration
+	for(i = 0; i < nWordCount; i++)
+		printf("%d. %s\n", i + 1, sGameStruct[i].strWord );
+	printf("\nEnter word to add trivia to: ");
+	i = searchWord(sGameStruct, nWordCount);
+	if(i != -1)
+		addTrivia(sGameStruct[i].sHintPair);
+	else	printf("\nWord not found\n");
 }
 
 /*	displayAlpha displays words alphabetically
@@ -503,10 +492,11 @@ void displayAlpha(struct wordStruct sGameStruct[],
 		}	
 	}
 
-	for(i = 0; i < nWordCount; i++)
+	for(i = 0; i < nWordCount; i++) //display loop
 		printf("%d. %s\n", i + 1, strTemp[i]);
 
 }
+
 /*	modifyWord modifies a word in the array of structs but keeps the struct for the relationship intact
 	@param wordStruct sGameStruct - struct where the word is in
 	@param nWordCount - limits for loop
@@ -516,13 +506,10 @@ void modifyWord(struct wordStruct sGameStruct[],
 {
 	int j, nTemp, nChoice, nSelect; //variable declaration
 	
-	displayAlpha(sGameStruct, nWordCount);
-
-	do //everything below is pretty self explanatory due to the printfs
-	{
+	displayAlpha(sGameStruct, nWordCount); //everything below is pretty self explanatory due to the printfs
 	printf("Enter **WORD** to modify: ");
 	nTemp = searchWord(sGameStruct, nWordCount);
-
+	if(nTemp != -1)
 		do
 		{	
 			printf("Modify 1 - Word or 2 - Hints?: ");
@@ -544,27 +531,23 @@ void modifyWord(struct wordStruct sGameStruct[],
 				j++;
 				}while(strcmp(sGameStruct[nTemp].sHintPair[j].strRelation, "\0") != 0);
 			
-			do
-			{
-			printf("Enter number (1 - %d) of hint to edit: ", j);
-			scanf("%d", &nSelect);
-			
-			printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
-			fflush(stdin);
-			scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelation);
-			
-			printf("\nEnter hint value to add (ex.Furniture, Leg, Meter): ");
-			fflush(stdin);
-			scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelationValue);
-
-			}while ( nSelect < 0 || nSelect >= j);
-			
-			}
+				do
+				{
+				printf("Enter number (1 - %d) of hint to edit: ", j);
+				scanf("%d", &nSelect);
+				
+				printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
+				fflush(stdin);
+				scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelation); //relation add
 		
+				printf("\nEnter hint value to add (ex.Furniture, Leg, Meter): "); 
+				fflush(stdin);
+				scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelationValue);//relation value add
+	
+				}while ( nSelect < 0 || nSelect >= j);
+			}
 		} while(nChoice != 1 && nChoice != 2);
-
-		nTemp = -1;
-	}while( nTemp != -1);	
+		else printf("\nWord not found!");	
 }
 
 /*	deleteWord "deletes" a word from the array, in reality it just sets the word and its accompanying relation
@@ -583,9 +566,7 @@ void deleteWord(struct wordStruct sGameStruct[],
 	if(nIndex != -1)
 	{
 		for(i = nIndex; i < *nWordCount; i++)
-		{	
 			sGameStruct[i] = sGameStruct[i + 1]; //then it gets copied over
-		}
 		*nWordCount-=1;
 		displayAlpha(sGameStruct, *nWordCount);
 	}
@@ -601,12 +582,11 @@ void deleteWord(struct wordStruct sGameStruct[],
 void deleteHint(struct wordStruct sGameStruct[],
 				int nWordCount)
 {
-	int nIndex, i , j, nTemp;
+	int nIndex, i , j = 0, nTemp; //variable initialization
 	displayAlpha(sGameStruct, nWordCount);
 	printf("Enter **WORD** of hint to DELETE: ");
 	nIndex = searchWord(sGameStruct, nWordCount);
-	
-	j = 0;
+
 	do
 	{
 	printf("[%d.] %s: %s\n", j + 1, sGameStruct[nIndex].sHintPair[j].strRelation ,sGameStruct[nIndex].sHintPair[j].strRelationValue );
@@ -614,20 +594,21 @@ void deleteHint(struct wordStruct sGameStruct[],
 	}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);	
 	
 	printf("Enter **NUMBER** of hint to DELETE: ");
-	scanf("%d", &nTemp);
-	nTemp--;
+	scanf("%d", &nTemp); nTemp--;
 	
-	for(i = nTemp; i < j; i++)
-	{	
-		if(i != 9)
-		{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, sGameStruct[nIndex].sHintPair[i + 1].strRelation);
-			strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, sGameStruct[nIndex].sHintPair[i + 1].strRelationValue);
+	if(strcmp(sGameStruct[nIndex].sHintPair[nTemp].strRelation, "\0") != 0)
+		for(i = nTemp; i < j; i++)
+		{	
+			if(i != 9)
+			{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, sGameStruct[nIndex].sHintPair[i + 1].strRelation);
+				strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, sGameStruct[nIndex].sHintPair[i + 1].strRelationValue);
+			}
+			else //exists because it might grab from an upper value if i == 9 then it would be filled with garbage values
+			{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, "\0");
+				strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, "\0");
+			}
 		}
-		else //exists because it might grab from an upper value if i == 9 then it would be filled with garbage values
-		{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, "\0");
-			strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, "\0");
-		}
-	}	
+	else printf("\nHint does not exist!\n");
 }
 
 /* 	viewHints views hints from the wordStruct, takes string as input, searches, then gives back the result
@@ -651,16 +632,15 @@ void viewHints(struct wordStruct sGameStruct[],
 		j++;
 		}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);
 	}
-	else
-		printf("\nWord not found\n");
+	else printf("\nWord not found\n");
 }
 
 /*	boardSize asks for input for width and height of the board and calculates how many spaces in the 10x10 board will be used
 	@param xAxis - saves board width
 	@param yAxis - saves board height
-	@param product - how many spaces
+	@param product - how many spaces are in the board
 */
-void boardSize(int *xAxis, int *yAxis, int *product)
+void boardSize(int *xAxis, int *yAxis, int *nProduct)
 {
 	printf("\nInput width of board (Minimum - 3, Maximum - 10): ");
 	do{ fflush(stdin); scanf("%d", xAxis);
@@ -669,7 +649,7 @@ void boardSize(int *xAxis, int *yAxis, int *product)
 	do{ fflush(stdin); scanf("%d", yAxis);
 	} while ( !(*yAxis > 2 && *yAxis <11));
 	
- 	*product = *yAxis * *xAxis;
+ 	*nProduct = *yAxis * *xAxis;
 }
 /*	printBoard prints the board as a guide for the player, also shows what row the player is picking from
 	@param wordStruct tempBoard - is used to display the first letters of each word
@@ -691,9 +671,7 @@ printBoard(struct wordStruct tempBoard[10][10], int nX, int nY,  int nLevel)
 	for(i = 0; i < nY ; i++)
 	{
 		for(j = 0; j < nX; j++)
-		{	printf("%c ", tempBoard[i][j].strWord[0]);
-			
-		}
+			printf("%c ", tempBoard[i][j].strWord[0]);
 		if(i < nLevel)
 			printf("\t\tCLEAR");
 		else if(i == nLevel)
@@ -712,38 +690,33 @@ printBoard(struct wordStruct tempBoard[10][10], int nX, int nY,  int nLevel)
 void
 fillStructBoard(struct wordStruct sGameStruct[], struct wordStruct sTempStruct[10][10], int nX, int nY, int nWordCount, int nSize)
 {
-	int i, j, k = 0, nTemp, nFindNum = false, loopChecker = 0;
+	int i, j, k = 0, nTemp, nFindNum = false;
 	int nArrDupeCheck[150];
 	time_t randSeed;
 	srand( (unsigned) time(&randSeed));
-	rand(); rand(); rand();
 	
 	for(j = 0; j < nSize; j++)
 	{	do
 		{
 		nTemp =  rand() % (nWordCount);
 		nFindNum = false;
-		loopChecker++;
-		for(i = 0; i < nSize - 1; i++) // -1 just so it doesn't stuck in a loop
+		for(i = 0; i < nSize - 1; i++) // - 1 just so it doesn't get stuck in a loop if it nWordCount == nSize because it'll keep checking itself if it does
 			if(nArrDupeCheck[i] == nTemp)
 				nFindNum = true;
-		
 		} while (nFindNum == true);
 		nArrDupeCheck[j] = nTemp;
 	}
 
 	for(i = 0; i < nY; i++)
-	{
 		for(j = 0; j < nX; j++)
-		{
-			sTempStruct[i][j] = sGameStruct[nArrDupeCheck[k]];
+		{	sTempStruct[i][j] = sGameStruct[nArrDupeCheck[k]];
 			k++;
 		}
-	}
 	
 }
 /*	hintCounter counts hints and returns how many were found, used for the game
-	hints sHintStruct - struct array to count hints from
+	@param hints sHintStruct - struct array to count hints from
+	@return amount of hints in sHintStruct
 */
 int
 hintCounter(struct hints sHintStruct[])
@@ -751,7 +724,6 @@ hintCounter(struct hints sHintStruct[])
 	int i = 0;
 	while(strcmp(sHintStruct[i].strRelation, "\0") != 0)
 		i++;
-
 	return i;
 }
 
@@ -779,7 +751,6 @@ wordPick(struct wordStruct sTempGameStruct[10][10],
 			printf("From left to right, enter a NUMBER: ");
 		do
 		{
-		
 			if(sTempGameStruct[nLevel][nInput].strWord[0] == '-')
 				printf("\nYou can't select a word that you failed, choose another one\n");
 			if(bLCount == true)
@@ -789,7 +760,7 @@ wordPick(struct wordStruct sTempGameStruct[10][10],
 			scanf("%d", &nInput);
 			nInput--;
 			bLCount = true;
-		}while( !(nInput >= 0 && nInput <= nX) ||  sTempGameStruct[nLevel][nInput].strWord[0] == '-'  );
+		}while( !(nInput >= 0 && nInput < nX) ||  sTempGameStruct[nLevel][nInput].strWord[0] == '-'  );
 			
 		printf("You picked %c\n", sTempGameStruct[nLevel][nInput].strWord[0]);
 		nRandHintLimit = hintCounter(sTempGameStruct[nLevel][nInput].sHintPair);
@@ -810,7 +781,7 @@ wordPick(struct wordStruct sTempGameStruct[10][10],
 				
 			}	
 		else
-			{	printf("\n**Wrong answer\nCorrect Answer: %s\nPick another one from the same row**\n", sTempGameStruct[nLevel][nInput].strWord);
+			{	printf("\n**Wrong answer**\nCorrect Answer: %s\n**Pick another one from the same row**\n", sTempGameStruct[nLevel][nInput].strWord);
 				nFailCount++;
 				sTempGameStruct[nLevel][nInput].strWord[0] = '-';
 			}	
@@ -855,61 +826,58 @@ main()
 	int nMenuVal, nAdMenVal, nWordCount = 0;
 //initialize array
 	struct wordStruct sGameStruct[150]; initGameArr(sGameStruct);
-
 //loop for the game
-do
-{
-	nMenuVal = mainMenu();
-	switch(nMenuVal)
+	do
 	{
-		case 1:
-		if(nWordCount != 0)
-			gamePhase(sGameStruct, nWordCount);
-		else
-		{	printf("No words loaded in yet!\n\n");}
-			break;
-		case 2:
-			do
-			{
-			nAdMenVal = adminMenu();
-			switch(nAdMenVal)
-			{
-				case 1:
-					addWord(sGameStruct, &nWordCount);
-					break;
-				case 2:
-					addTriviaComp(sGameStruct, nWordCount);
-					break;
-				case 3:
-					modifyWord(sGameStruct, nWordCount);
-					break;
-				case 4:
-					deleteWord(sGameStruct, &nWordCount);
-					break;
-				case 5:
-					deleteHint(sGameStruct, nWordCount);
-					break;
-				case 6:
-					viewWords(sGameStruct, nWordCount);
-					break;
-				case 7:
-					viewHints(sGameStruct, nWordCount);
-					break;					
-				case 8:
-					exportArray(sGameStruct, nWordCount);
-					break;
-				case 9:
-					importArray(sGameStruct, &nWordCount);
-					break;
-				default:
-					printf("\n");
-					break;
-			}
-			}while(nAdMenVal != 10);
-			break;
-		case 816:
-			matikanetannhauserfunc();
-	}
-}while(nMenuVal != 3);
-
+		nMenuVal = mainMenu();
+		switch(nMenuVal)
+		{
+			case 1:
+			if(nWordCount != 0)
+				gamePhase(sGameStruct, nWordCount);
+			else
+			{	printf("No words loaded in yet!\n\n");}
+				break;
+			case 2:
+				do
+				{
+				nAdMenVal = adminMenu(nMenuVal);
+				switch(nAdMenVal)
+				{
+					case 1:
+						addWord(sGameStruct, &nWordCount);
+						break;
+					case 2:
+						if(nWordCount != 0) addTriviaComp(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 3:
+						if(nWordCount != 0) modifyWord(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 4:
+						if(nWordCount != 0) deleteWord(sGameStruct, &nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 5:
+						if(nWordCount != 0) deleteHint(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 6:
+						if(nWordCount != 0) viewWords(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 7:
+						if(nWordCount != 0) viewHints(sGameStruct, nWordCount);	else printf("\nImport words first! No words in memory\n");
+						break;					
+					case 8:
+						if(nWordCount != 0) exportArray(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");
+						break;
+					case 9:
+						importArray(sGameStruct, &nWordCount);
+						break;
+					default:
+						printf("\n");
+						break;
+				}
+				}while(nAdMenVal != 10);
+				break;
+			case 816: matikanetannhauserfunc(); printf("\n");
+		}
+	}while(nMenuVal != 3);
 }
