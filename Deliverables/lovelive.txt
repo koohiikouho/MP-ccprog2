@@ -1,0 +1,214 @@
+25
+Object: TAKAMI CHIKA
+Hair: Orange
+Role: Main Protagonist
+Hair: Short
+Seiyuu: Inami Anju
+Part of: CYaRon!
+School Year: 2nd Year
+Likes: Oranges
+
+Object: WATANABE YOU
+Catchphrase: Yousoro!
+Seiyuu: Saitou Shuka
+Part of: CYaRon!
+Hair: Grey
+Hair: Short
+School Year: 2nd Year
+
+Object: SAKURAUCHI RIKO
+Plays: Piano
+Part of: Guilty Kiss
+Hair: Red
+Hair: Long
+Seiyuu: Aida Rikako
+School Year: 2nd Year
+
+Object: TSUSHIMA YOSHIKO
+Is a: Chuunibyo
+Part of: Guilty Kiss
+Hair: Blue
+Hair: Long
+Seiyuu: Kobayashi Aika
+School Year: 1st Year
+
+Object: KUNIKIDA HANAMARU
+Part of: AZALEA
+Hair: Medium-Length
+Hair: Brown
+Eyes: Yellow
+Likes: Books
+Seiyuu: Takatsuki Kinako
+School Year: 1st Year
+
+Object: KUROSAWA RUBY
+Catchphrase: Ganbaruby!
+Sister of: Kurosawa Dia
+Part of: CYaRon!
+Hair: Medium-Length
+Hair: Red
+Seiyuu: Furihata Ai
+School Year: 1st Year
+
+Object: OHARA MARI
+Catchphrase: Shiny!
+Part of: Guilty Kiss!
+Hair: Blonde
+Hair: Medium-Length
+Seiyuu: Suzuki Aina
+School Year: 3rd Year
+
+Object: MATSUURA KANAN
+Part of: AZALEA
+Eyes: Purple
+Hair: Ponytail
+Hair: Blue
+Seiyuu: Suwa Nanaka
+School Year: 3rd Year
+
+Object: KUROSAWA DIA
+Part of: AZALEA
+Hair: Long
+Hair: Black
+Catchphrase: Buu Buu
+Seiyuu: Komiya Arisa
+School Year: 3rd Year
+
+Object: UEHARA AYUMU
+Part of: A ZU NA
+Likes: You(Yuu) a lot
+Eyes: Amber
+Hair: Salmon Pink
+Hair: Medium-Length
+Seiyuu: Onishi Aguri
+School Year: 2nd Year
+
+Object: YUUKI SETSUNA
+Part of: A ZU NA
+Hair: Black
+Eyes: Gray
+Seiyuu: Hayashi Coco
+School Year: 2nd Year
+Hair: Long
+
+Object: MIYASHITA AI
+Part of: Diver Diva
+Hair: Blonde
+Hair: Ponytail
+Eyes: Orange
+Seiyuu: Murakami Natsumi
+School Year: 2nd Year
+
+Object: LANZHU ZHONG
+Part of: R3BIRTH
+Hair: Strawberry Blonde
+Hair: Long
+Eyes: Blue
+Seiyuu: Homoto Akina
+Nationality: Chinese
+School Year: 2nd Year
+
+Object: NAKASU KASUMI
+Part of: QU4RTZ
+Eyes: Magenta
+Hair: Short
+Hair: Brown-Greyish
+Seiyuu: Sagara Mayu
+School Year: 1st Year
+
+Object: MIFUNE SHIORIKO
+Part of: R3BIRTH
+Eyes: Red
+Hair: Dark Green
+Hair: Short
+Seiyuu: Koizumi Moeka
+School Year: 1st Year
+
+Object: OSAKA SHIZUKU
+Part of: A ZU NA
+Hair: Long
+Hair: Brown
+Eyes: Brown
+Seiyuu: Maeda Kaori
+School Year: 1st Year
+
+Object: TENNOUJI RINA
+Part of: A ZU NA
+Hair: Short
+Hair: Pink
+Eyes: Amber
+Seiyuu: Tanaka Chiemi
+Face: Notebook
+School Year: 1st Year
+
+Object: ASAKA KARIN
+Part of: Diver Diva
+Hair: Navy-Blue
+Hair: Short
+Eyes: Blue
+Seiyuu: Kubota Miyu
+School Year: 3rd Year
+
+Object: KONOE KANATA
+Part of: QU4RTZ
+Hair: Light-Brown
+Hair: Long
+Eyes: Purple
+Seiyuu: Kitou Akari
+School Year: 3rd Year
+
+Object: VERDE EMMA
+Part of: QU4RTZ
+Hair: Brown
+Hair: Twin-tails
+Eyes: Blue
+Seiyuu: Sashide Maria
+School Year: 3rd Year
+
+Object: TAYLOR MIA
+Part of: R3BIRTH
+Hair: Silver
+Hair: Short
+Eyes: Grey
+Role: Co-songwriter
+Seiyuu: Uchida Shu
+School Year: 3rd Year
+
+Object: SHIBUYA KANON
+Eyes: Purple
+Hair: Orange
+Hair: Medium-Legnth
+Friend: Arashi Chisato
+Part of: CatChu!
+School Year: 3rd Year
+Seiyuu: Sayuri Date
+
+Object: ARASHI CHISATO
+Eyes: Pink
+Hair: Double Buns
+Hair: White
+Part of: 5yncri5e!
+Likes: Takoyaki
+Friend: Shibuya Kanon
+School Year: 3rd Year
+Catchphrase: Wissu!
+Seiyuu: Misaki Nako
+
+Object: HEANNA SUMIRE
+Eyes: Green
+Hair: Blonde
+Hair: Long
+Part of: CatChu!
+Catchprase: Galaxy!
+Hates: Keke Tang
+Seiyuu: Peyton Naomi
+
+Object: TANG KEKE
+Eyes: Blue
+Hates: Heanna Sumire
+Hair: Short
+Hair: Grey
+Nationality: Chinese
+Part of: KALEIDOSCORE
+Seiyuu: Liyuu
+

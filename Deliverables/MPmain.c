@@ -34,7 +34,6 @@ int
 mainMenu()
 {
 	int nReturnVal = 1; //variable declaration
-	
 	do
 	{
 	if( !(nReturnVal >= 1 && nReturnVal <= 3) ) //guards against out of bounds inputs
@@ -87,34 +86,36 @@ toUpperString(char string[])
 */
 void addTrivia(struct hints sHints[])
 {
-	int i, bContinue = 0; 	//variable declaration / temp container declaration
+	int i = 0, bContinue = 0; 	//variable declaration / temp container declaration
 	char strTemp1[16], strTemp2[31];
 	
 	while(strcmp(sHints[i].strRelation, "\0") != 0 && i < 10) //checks where the next unoccupied hint is
 		i++;
-
-	if(i < 10) 	//do while asks for inputs until nContinue is == 0 or i is equal to 10
-	do
-	{
-	if(bContinue == 1)
-		i++; 
-	printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
-	fflush(stdin);
-	scanf("%[^\n]%*c", strTemp1);
-	printf("\nEnter hint value to add (ex.Furniture, Leg, Meter): ");
-	fflush(stdin);
-	scanf("%[^\n]%*c", strTemp2);
-	strcpy(sHints[i].strRelation, strTemp1);
-	strcpy(sHints[i].strRelationValue, strTemp2);
-//	strcpy(strTemp1, "\0");
-//	strcpy(strTemp2, "\0");
-	printf("\nAdd more hints (1 to continue, 0 to stop)? ");
-	fflush(stdin);
-	scanf("%d", &bContinue);
-	}while( bContinue == 1 && i < 10);
+		
+	if(i < 10) 
+	{	//do while asks for inputs until nContinue is == 0 or i is equal to 10
+		do
+		{
+		printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
+		fflush(stdin);
+		scanf("%[^\n]%*c", strTemp1);
+		printf("\nEnter hint value to add (ex.Furniture, Leg, Meter): ");
+		fflush(stdin);
+		scanf("%[^\n]%*c", strTemp2);
+		strcpy(sHints[i].strRelation, strTemp1);
+		strcpy(sHints[i].strRelationValue, strTemp2);
+		strcpy(strTemp1, "\0");
+		strcpy(strTemp2, "\0"); 
+		printf("\nAdd more hints (1 to continue, 0 to stop)? ");
+		fflush(stdin);
+		scanf("%d", &bContinue);
+		if(bContinue == 1 && i < 10)
+			i++; 
+		
+		}while( bContinue == 1 && i < 10);
+	}
 	else
 		printf("\nHint data already full! Delete to add more"); //gets printed if there are already 10 hints
-	
 }
 
 /* addWord adds a word and a minimum of 1 relation and relation value to the struct in the main menu
@@ -130,7 +131,7 @@ addWord(struct	wordStruct gStruct[],
 	bool bDupe = false, bRep = false;
 	char strTemp[21];
 
-	while(strcmp(gStruct[i].strWord, "\0") != 0) //counts how many words are in the struct, was made before the word counting function
+	while(strcmp(gStruct[i].strWord, "\0") != 0 && i < 149) //counts how many words are in the struct, was made before the word counting function
 		i++;
 	do{
 	if(bRep == true) //if the while function has already executed more than once
@@ -161,7 +162,8 @@ void
 initGameArr(struct wordStruct sGameStruct[])
 {
 	int i,j; //variable declaration
-	for(i=0;i<150;i++)strcpy(sGameStruct[i].strWord,"\0"); //sets words to null
+	for(i=0;i<150;i++)
+		strcpy(sGameStruct[i].strWord,"\0"); //sets words to null
 	for(i=0;i<150;i++)
 		for(j=0;j<10;j++) //sets strings to null
 		{	strcpy(sGameStruct[i].sHintPair[j].strRelation,"\0");
@@ -197,7 +199,7 @@ exportArray(struct wordStruct sGameStruct[],
 		fprintf(fp, "%s: ", sGameStruct[i].sHintPair[j].strRelation);
 		fprintf(fp, "%s\n", sGameStruct[i].sHintPair[j].strRelationValue);
 		j++; 
-	}while(strcmp(sGameStruct[i].sHintPair[j].strRelation,"\0") != 0);
+	}while(strcmp(sGameStruct[i].sHintPair[j].strRelation,"\0") != 0 && j < 10);
 	fprintf(fp, "\n");
 	}
 	fclose(fp);
@@ -316,7 +318,8 @@ importArray(struct wordStruct sGameStruct[],
 	}
 	
 	if(i != 0 && nSkip == false) //this is if there isn't a duplicate
-		{      
+		{   
+			toUpperString(strTemp);
 			strcpy(sGameStruct[*nWordCount].strWord, strTemp);
 			k = 0;
 			fgets(strTemp, 50, fp); 
@@ -391,7 +394,7 @@ void viewWords(struct wordStruct sGameStruct[],
 		{
 		printf("%s: %s\n",tempStruct[i].sHintPair[j].strRelation,tempStruct[i].sHintPair[j].strRelationValue);
 		j++;
-		}while(strcmp(tempStruct[i].sHintPair[j].strRelation, "\0") != 0);
+		}while(strcmp(tempStruct[i].sHintPair[j].strRelation, "\0") != 0 && j < 10);
 		printf("\npress 'N' for next, 'P' for previous, 'X' to end the display and go back to the menu: ");
 	
 		do
@@ -428,7 +431,8 @@ void viewWords(struct wordStruct sGameStruct[],
 	@param nWordCount - for linear searching purposes
 	@return returns -1 if word is not found, index of the word if word is found
 */
-int searchWord(struct wordStruct sGameStruct[] , int nWordCount)
+int searchWord(struct wordStruct sGameStruct[] ,
+			   int nWordCount)
 {
 	char temp[21]; //variable declarations
 	int i;
@@ -528,22 +532,30 @@ void modifyWord(struct wordStruct sGameStruct[],
 				{
 				printf("[%d.] %s: %s\n", j + 1, sGameStruct[nTemp].sHintPair[j].strRelation ,sGameStruct[nTemp].sHintPair[j].strRelationValue );
 				j++;
-				}while(strcmp(sGameStruct[nTemp].sHintPair[j].strRelation, "\0") != 0);
+				}while(strcmp(sGameStruct[nTemp].sHintPair[j].strRelation, "\0") != 0 && j < 10);
 			
 				do
 				{
-				printf("Enter number (1 - %d) of hint to edit: ", j);
-				scanf("%d", &nSelect);
+					
+				do
+				{
+					if(nSelect > j)
+							printf("Enter value within range (1 - %d)\n", j);
+					nSelect = 0;
+					printf("Enter number (1 - %d) of hint to edit: ", j);
+					scanf("%d", &nSelect);
+					} while (nSelect > j);
+
 				
-				printf("\nEnter hint to add (ex.Kind of, Part, Height): ");
+				printf("\nEnter hint to replace (ex.Kind of, Part, Height): ");
 				fflush(stdin);
 				scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelation); //relation add
 		
-				printf("\nEnter hint value to add (ex.Furniture, Leg, Meter): "); 
+				printf("\nEnter hint value to replace (ex.Furniture, Leg, Meter): "); 
 				fflush(stdin);
 				scanf("%[^\n]%*c", sGameStruct[nTemp].sHintPair[nSelect - 1].strRelationValue);//relation value add
 	
-				}while ( nSelect < 0 || nSelect >= j);
+				}while ( nSelect < 0 || nSelect > j);
 			}
 		} while(nChoice != 1 && nChoice != 2);
 		else printf("\nWord not found!");	
@@ -589,24 +601,26 @@ void deleteHint(struct wordStruct sGameStruct[],
 	{
 	printf("[%d.] %s: %s\n", j + 1, sGameStruct[nIndex].sHintPair[j].strRelation ,sGameStruct[nIndex].sHintPair[j].strRelationValue );
 	j++;
-	}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);	
-	
+	}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0 && j < 10);	
 	printf("Enter **NUMBER** of hint to DELETE: ");
 	scanf("%d", &nTemp); nTemp--;
 	
-	if(strcmp(sGameStruct[nIndex].sHintPair[nTemp].strRelation, "\0") != 0)
-		for(i = nTemp; i < j; i++)
-		{	
-			if(i != 9)
-			{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, sGameStruct[nIndex].sHintPair[i + 1].strRelation);
-				strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, sGameStruct[nIndex].sHintPair[i + 1].strRelationValue);
+	if(j != 1)
+	{
+		if(strcmp(sGameStruct[nIndex].sHintPair[nTemp].strRelation, "\0") != 0)
+			for(i = nTemp; i < j; i++)
+			{	
+				if(i != 9)
+				{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, sGameStruct[nIndex].sHintPair[i + 1].strRelation);
+					strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, sGameStruct[nIndex].sHintPair[i + 1].strRelationValue);
+				}
+				else //exists because it might grab from an upper value if i == 9 then it would be filled with garbage values
+				{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, "\0");
+					strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, "\0");
+				}
 			}
-			else //exists because it might grab from an upper value if i == 9 then it would be filled with garbage values
-			{	strcpy(sGameStruct[nIndex].sHintPair[i].strRelation, "\0");
-				strcpy(sGameStruct[nIndex].sHintPair[i].strRelationValue, "\0");
-			}
-		}
-	else printf("\nHint does not exist!\n");
+		else printf("\nHint does not exist!\n");
+	} else printf("\nCannot delete final hint!\n");
 }
 
 /* 	viewHints views hints from the wordStruct, takes string as input, searches, then gives back the result
@@ -628,7 +642,7 @@ void viewHints(struct wordStruct sGameStruct[],
 		{
 		printf("%d. %s: %s\n", j + 1, sGameStruct[nIndex].sHintPair[j].strRelation ,sGameStruct[nIndex].sHintPair[j].strRelationValue );
 		j++;
-		}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0);
+		}while(strcmp(sGameStruct[nIndex].sHintPair[j].strRelation, "\0") != 0 && j < 10);
 	}
 	else printf("\nWord not found\n");
 }
@@ -638,14 +652,16 @@ void viewHints(struct wordStruct sGameStruct[],
 	@param yAxis - saves board height
 	@param product - how many spaces are in the board
 */
-void boardSize(int *xAxis, int *yAxis, int *nProduct)
+void boardSize(	int *xAxis, 
+			 	int *yAxis,
+				int *nProduct)
 {
 	printf("\nInput width of board (Minimum - 3, Maximum - 10): ");
 	do{ fflush(stdin); scanf("%d", xAxis);
-	} while ( !(*xAxis > 2 && *xAxis <11));
+	} while ( !(*xAxis > 1 && *xAxis <11));
 		printf("\nInput length of board (Minimum - 3, Maximum - 10): ");
 	do{ fflush(stdin); scanf("%d", yAxis);
-	} while ( !(*yAxis > 2 && *yAxis <11));
+	} while ( !(*yAxis > 1 && *yAxis <11));
 	
  	*nProduct = *yAxis * *xAxis;
 }
@@ -656,7 +672,10 @@ void boardSize(int *xAxis, int *yAxis, int *nProduct)
 	@param nLevel - used to show the player where they currently are
 */
 void
-printBoard(struct wordStruct tempBoard[10][10], int nX, int nY,  int nLevel)
+printBoard(struct wordStruct tempBoard[10][10],
+			int nX,
+			int nY, 
+			int nLevel)
 {
 	int i , j;
 	for(i = 0; i < nX; i++)
@@ -686,12 +705,17 @@ printBoard(struct wordStruct tempBoard[10][10], int nX, int nY,  int nLevel)
 	@param nSize - limits the for loop to only look in values from 0 to nSize
 */
 void
-fillStructBoard(struct wordStruct sGameStruct[], struct wordStruct sTempStruct[10][10], int nX, int nY, int nWordCount, int nSize)
+fillStructBoard(struct wordStruct sGameStruct[], 
+				struct wordStruct sTempStruct[10][10], 
+				int nX, 
+				int nY,
+				int nWordCount, 
+				int nSize)
 {
 	int i, j, k = 0, nTemp, nFindNum = false;
 	int nArrDupeCheck[150];
 	time_t randSeed;
-	srand( (unsigned) time(&randSeed));
+	srand( (unsigned) time(&randSeed)); //to randomize trivia
 	
 	for(j = 0; j < nSize; j++)
 	{	do
@@ -720,7 +744,7 @@ int
 hintCounter(struct hints sHintStruct[])
 {
 	int i = 0;
-	while(strcmp(sHintStruct[i].strRelation, "\0") != 0)
+	while(strcmp(sHintStruct[i].strRelation, "\0") != 0 && i < 10)
 		i++;
 	return i;
 }
@@ -785,7 +809,7 @@ wordPick(struct wordStruct sTempGameStruct[10][10],
 	}
 	while( (nLevel < nY) && (nFailCount < nX) );
 	
-	if(nLevel == nY)
+	if(nLevel == nY) //both of these are mutually exclusive
 		printf("\n**You win! I'm proud of you**\n");
 	else if(nFailCount == nX)
 		printf("\n**You lose! Better luck next time**\n");
@@ -797,7 +821,8 @@ wordPick(struct wordStruct sTempGameStruct[10][10],
 	@param nWordCount - used for out of bounds board size
 */
 void
-gamePhase(struct wordStruct sGameStruct[], int nWordCount)
+gamePhase(struct wordStruct sGameStruct[], 
+		  int nWordCount)
 {
 	struct wordStruct sTempGameStruct[10][10];
 	int nXAxis, nYAxis, nSize = 0;
@@ -811,7 +836,6 @@ gamePhase(struct wordStruct sGameStruct[], int nWordCount)
 	wordPick(sTempGameStruct, nXAxis, nYAxis);
 	
 	printf("\nGame Over\n");
-
 }
 	
 /*	the main function's primary purpose is to be like a global variable holder but not really
@@ -830,10 +854,10 @@ main()
 		switch(nMenuVal)
 		{
 			case 1:
-			if(nWordCount != 0)
+			if(nWordCount >= 9)
 				gamePhase(sGameStruct, nWordCount);
 			else
-			{	printf("No words loaded in yet!\n\n");}
+			{	printf("Not enough words to create board!\n\n");}
 				break;
 			case 2:
 				do
@@ -842,7 +866,7 @@ main()
 				switch(nAdMenVal)
 				{
 					case 1:
-						addWord(sGameStruct, &nWordCount);
+						if(nWordCount != 150 )addWord(sGameStruct, &nWordCount); else printf("\nCannot add any more words, memory full!\n");
 						break;
 					case 2:
 						if(nWordCount != 0) addTriviaComp(sGameStruct, nWordCount); else printf("\nImport words first! No words in memory\n");

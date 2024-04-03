@@ -1,0 +1,152 @@
+Select Option:
+1. Game Menu
+2. Admin Menu
+3. Exit
+Enter your choice : 2
+Select Option:
+1. Add Word
+2. Add Trivia
+3. Modify Entry
+4. Delete Word
+5. Delete Clue
+6. View Words
+7. View Clues
+8. Export
+9. Import
+10. Back to Main Menu
+Enter your choice : 9
+Enter file name to import list (ex. exportedList.txt): lovelive.txt
+Data imported from "lovelive.txt"
+Select Option:
+1. Add Word
+2. Add Trivia
+3. Modify Entry
+4. Delete Word
+5. Delete Clue
+6. View Words
+7. View Clues
+8. Export
+9. Import
+10. Back to Main Menu
+Enter your choice : 10
+Select Option:
+1. Game Menu
+2. Admin Menu
+3. Exit
+Enter your choice : 1
+Input width of board (Minimum - 3, Maximum - 10): 3
+Input length of board (Minimum - 3, Maximum - 10): 5
+1 2 3 STATUS
+------------------------------
+M V L YOU ARE HERE
+O A S
+S N U
+O T M
+T K Y
+From left to right, enter a NUMBER: 1
+You picked M
+Here is your hint: Seiyuu: Suwa Nanaka
+Enter answer here (input in all caps): matsuura kanan
+**Correct Answer! Advance to the next level!**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O A S YOU ARE HERE
+S N U
+O T M
+T K Y
+Enter value within range of the board (1 to 3): 2
+You picked A
+Here is your hint: Friend: Shibuya Kanon
+Enter answer here (input in all caps): arashi chisato
+**Correct Answer! Advance to the next level!**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N U YOU ARE HERE
+O T M
+T K Y
+Enter value within range of the board (1 to 3): 3
+You picked U
+Here is your hint: School Year: 2nd Year
+Enter answer here (input in all caps): uehara ayumu
+**Correct Answer! Advance to the next level!**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N * CLEAR
+O T M YOU ARE HERE
+T K Y
+Enter value within range of the board (1 to 3): 1
+You picked O
+Here is your hint: Hair: Medium-Length
+Enter answer here (input in all caps): a
+**Wrong answer**
+Correct Answer: OHARA MARI
+**Pick another one from the same row**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N * CLEAR
+- T M YOU ARE HERE
+T K Y
+You can't select a word that you failed, choose another one
+Enter value within range of the board (1 to 3): 2
+You picked T
+Here is your hint: Is a: Chuunibyo
+Enter answer here (input in all caps): tsushima yoshiko
+**Correct Answer! Advance to the next level!**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N * CLEAR
+- * M CLEAR
+T K Y YOU ARE HERE
+Enter value within range of the board (1 to 3): 3
+You picked Y
+Here is your hint: Hair: Long
+Enter answer here (input in all caps): a
+**Wrong answer**
+Correct Answer: YUUKI SETSUNA
+**Pick another one from the same row**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N * CLEAR
+- * M CLEAR
+T K - YOU ARE HERE
+You can't select a word that you failed, choose another one
+Enter value within range of the board (1 to 3): 2
+You picked K
+Here is your hint: School Year: 3rd Year
+Enter answer here (input in all caps): a
+**Wrong answer**
+Correct Answer: KONOE KANATA
+**Pick another one from the same row**
+1 2 3 STATUS
+------------------------------
+* V L CLEAR
+O * S CLEAR
+S N * CLEAR
+- * M CLEAR
+T - - YOU ARE HERE
+You can't select a word that you failed, choose another one
+Enter value within range of the board (1 to 3): 1
+You picked T
+Here is your hint: Hair: Short
+Enter answer here (input in all caps): tang keke
+**Wrong answer**
+Correct Answer: TAYLOR MIA
+**Pick another one from the same row**
+**You lose! Better luck next time**
+Game Over
+Select Option:
+1. Game Menu
+2. Admin Menu
+3. Exit
+Enter your choice :
